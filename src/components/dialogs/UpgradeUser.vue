@@ -99,7 +99,10 @@ const yearlyDiscount = computed(() => {
   const result = (numerator / denomenator) * 100
   return Math.round(result)
 })
-const lifetimePrice = computed(() => consts.price('life'))
+const lifetimePrice = computed(() => {
+  const isStudentDiscount = studentDiscountIsAvailable.value
+  return consts.price('life', isStudentDiscount)
+})
 const updatePeriod = (value) => {
   state.period = value
 }

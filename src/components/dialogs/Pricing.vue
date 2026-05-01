@@ -70,12 +70,18 @@ const updateDialogHeight = async () => {
 
 const isSecureAppContextIOS = computed(() => consts.isSecureAppContextIOS)
 const studentDiscountIsAvailable = computed(() => userStore.studentDiscountIsAvailable)
-const monthlyPrice = computed(() => consts.price('month').amount)
+const monthlyPrice = computed(() => {
+  const isStudentDiscount = studentDiscountIsAvailable.value
+  return consts.price('month', isStudentDiscount).amount
+})
 const yearlyPrice = computed(() => {
-  const isStudentDiscount = userStore.studentDiscountIsAvailable
+  const isStudentDiscount = studentDiscountIsAvailable.value
   return consts.price('year', isStudentDiscount).amount
 })
-const lifetimePrice = computed(() => consts.price('life').amount)
+const lifetimePrice = computed(() => {
+  const isStudentDiscount = studentDiscountIsAvailable.value
+  return consts.price('life', isStudentDiscount).amount
+})
 
 // child dialogs
 
